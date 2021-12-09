@@ -1,0 +1,9 @@
+--2021-12-03 19:55:47--  http://kubectl/
+Resolving kubectl (kubectl)... failed: Name or service not known.
+wget: unable to resolve host address 'kubectl'
+--2021-12-03 19:55:47--  http://get/
+Resolving get (get)... failed: Name or service not known.
+wget: unable to resolve host address 'get'
+--2021-12-03 19:55:47--  http://csinode/
+Resolving csinode (csinode)... failed: Name or service not known.
+wget: unable to resolve host address 'csinode'

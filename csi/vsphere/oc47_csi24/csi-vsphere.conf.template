@@ -1,0 +1,12 @@
+[Global]
+cluster-id = "${K8S_CLUSTERID}"
+cluster-distribution = "${K8S_DISTRIBUTION}" 
+#ca-file = <ca file path> # optional, use with insecure-flag set to false
+#thumbprint = "<cert thumbprint>" # optional, use with insecure-flag set to false without providing ca-file
+
+[VirtualCenter "${VCENTER}"]
+insecure-flag = "true"
+user = "${VC_USER}"
+password = "${VC_PWD}"
+port = "${VC_PORT}"
+datacenters = "${VC_DATACENTER}"
