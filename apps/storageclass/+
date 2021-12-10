@@ -1,0 +1,20 @@
+#apiVersion: storage.k8s.io/v1
+#kind: StorageClass
+metadata:
+  name: fast-mysql
+provisioner: kubernetes.io/vsphere-volume
+parameters:
+  diskformat: zeroedthick
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pv-claim
+spec:
+  storageClassName: fast-mysql
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
