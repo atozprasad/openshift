@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: yelb-https-ingress
+  labels:
+    app: yelb
+spec:
+  tls:
+  - hosts:
+      - yelbsecure.apps.ocp-jb.vsanpe.vmware.com
+    secretName: yelb-https-secret
+  rules:
+    - host: yelbsecure.apps.ocp-jb.vsanpe.vmware.com
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: yelb-ui-svc-np
+              port:
+                number: 80

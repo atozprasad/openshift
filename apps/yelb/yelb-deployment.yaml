@@ -1,0 +1,94 @@
+# Minor modification from http://www.it20.info/2017/07/yelb-yet-another-sample-app/ for demo purposes
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yelb-ui
+  namespace: yelb
+spec:
+  selector:
+    matchLabels:
+      app: yelb-ui
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: yelb-ui
+        tier: frontend
+    spec:
+      containers:
+      - name: yelb-ui
+        image: harbor-repo.vmware.com/challagandlp/mreferre/yelb-ui:0.6
+        securityContext:
+          allowPrivilegeEscalation: true
+          runAsUser: 0
+        ports:
+        - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-server
+  namespace: yelb
+spec:
+  selector:
+    matchLabels:
+      app: redis-server
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis-server
+        tier: cache
+    spec:
+      containers:
+      - name: redis-server
+        image: harbor-repo.vmware.com/challagandlp/mreferre/redis:4.0.2
+        ports:
+        - containerPort: 6379
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yelb-db
+  namespace: yelb
+spec:
+  selector:
+    matchLabels:
+      app: yelb-db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: yelb-db
+        tier: backenddb
+    spec:
+      containers:
+      - name: yelb-db
+        image: harbor-repo.vmware.com/challagandlp/mreferre/yelb-db:0.5
+        securityContext:
+          allowPrivilegeEscalation: true
+          runAsUser: 0
+        ports:
+        - containerPort: 5432
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yelb-appserver
+  namespace: yelb
+spec:
+  selector:
+    matchLabels:
+      app: yelb-appserver
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: yelb-appserver
+        tier: middletier
+    spec:
+      containers:
+      - name: yelb-appserver
+        image: harbor-repo.vmware.com/challagandlp/mreferre/yelb-appserver:0.5
+        ports:
+        - containerPort: 4567

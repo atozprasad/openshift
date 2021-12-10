@@ -1,0 +1,12 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+ # annotations:
+ #   haproxy.router.openshift.io/timeout: 5500ms
+ name: yelb-route
+spec:
+ host: yelb.apps.ocp-jb.vsanpe.vmware.com
+ path: /
+ to:
+   kind: Service
+   name: yelb-ui-svc-np

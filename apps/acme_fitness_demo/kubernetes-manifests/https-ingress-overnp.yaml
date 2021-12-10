@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: acme-fitness-https-ingress
+  namespace: acme-fitness
+  labels:
+    app: acme-fitness
+spec:
+  tls:
+  - hosts:
+      - acmefitness.apps.ocp-jb.vsanpe.vmware.com
+    secretName: acme-fitness-https-secret
+  rules:
+    - host: acmefitness.apps.ocp-jb.vsanpe.vmware.com
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: frontend
+              port:
+                number: 80

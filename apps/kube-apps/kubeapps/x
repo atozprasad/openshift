@@ -1,0 +1,389 @@
+Name:                   kubeapps
+Namespace:              kubeapps
+CreationTimestamp:      Wed, 01 Dec 2021 14:44:31 -0500
+Labels:                 app.kubernetes.io/component=frontend
+                        app.kubernetes.io/instance=kubeapps
+                        app.kubernetes.io/managed-by=Helm
+                        app.kubernetes.io/name=kubeapps
+                        helm.sh/chart=kubeapps-7.5.10
+Annotations:            deployment.kubernetes.io/revision: 1
+                        meta.helm.sh/release-name: kubeapps
+                        meta.helm.sh/release-namespace: kubeapps
+Selector:               app.kubernetes.io/component=frontend,app.kubernetes.io/instance=kubeapps,app.kubernetes.io/name=kubeapps
+Replicas:               2 desired | 2 updated | 2 total | 2 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:       app.kubernetes.io/component=frontend
+                app.kubernetes.io/instance=kubeapps
+                app.kubernetes.io/managed-by=Helm
+                app.kubernetes.io/name=kubeapps
+                helm.sh/chart=kubeapps-7.5.10
+  Annotations:  checksum/config: 7d954d9483c2863cf0239da2669c673b45b312110d8d0146133c514d7e46deb9
+  Containers:
+   nginx:
+    Image:      harbor-repo.vmware.com/challagandlp/kubeapps/nginx:1.21.3-debian-10-r47
+    Port:       8080/TCP
+    Host Port:  0/TCP
+    Limits:
+      cpu:     250m
+      memory:  128Mi
+    Requests:
+      cpu:      25m
+      memory:   32Mi
+    Liveness:   http-get http://:8080/healthz delay=60s timeout=5s period=10s #success=1 #failure=6
+    Readiness:  http-get http://:8080/ delay=0s timeout=5s period=10s #success=1 #failure=6
+    Environment:
+      BITNAMI_DEBUG:  false
+    Mounts:
+      /opt/bitnami/nginx/conf/server_blocks from vhost (rw)
+  Volumes:
+   vhost:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      kubeapps-frontend-config
+    Optional:  false
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   kubeapps-8474648c55 (2/2 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  68m   deployment-controller  Scaled up replica set kubeapps-8474648c55 to 2
+
+
+Name:                   kubeapps-internal-apprepository-controller
+Namespace:              kubeapps
+CreationTimestamp:      Wed, 01 Dec 2021 14:44:31 -0500
+Labels:                 app.kubernetes.io/component=apprepository
+                        app.kubernetes.io/instance=kubeapps
+                        app.kubernetes.io/managed-by=Helm
+                        app.kubernetes.io/name=kubeapps
+                        helm.sh/chart=kubeapps-7.5.10
+Annotations:            deployment.kubernetes.io/revision: 1
+                        meta.helm.sh/release-name: kubeapps
+                        meta.helm.sh/release-namespace: kubeapps
+Selector:               app.kubernetes.io/component=apprepository,app.kubernetes.io/instance=kubeapps,app.kubernetes.io/name=kubeapps
+Replicas:               1 desired | 1 updated | 1 total | 1 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:           app.kubernetes.io/component=apprepository
+                    app.kubernetes.io/instance=kubeapps
+                    app.kubernetes.io/managed-by=Helm
+                    app.kubernetes.io/name=kubeapps
+                    helm.sh/chart=kubeapps-7.5.10
+  Service Account:  kubeapps-internal-apprepository-controller
+  Containers:
+   controller:
+    Image:      harbor-repo.vmware.com/challagandlp/kubeapps/kubeapps-apprepository-controller:2.4.1-scratch-r0
+    Port:       <none>
+    Host Port:  <none>
+    Command:
+      /apprepository-controller
+    Args:
+      --user-agent-comment=kubeapps/2.4.1
+      --repo-sync-image=$(REPO_SYNC_IMAGE)
+      --repo-sync-cmd=/asset-syncer
+      --namespace=kubeapps
+      --database-secret-name=kubeapps-postgresql
+      --database-secret-key=postgresql-password
+      --database-url=kubeapps-postgresql:5432
+      --database-user=postgres
+      --database-name=assets
+      --repos-per-namespace=true
+    Limits:
+      cpu:     250m
+      memory:  128Mi
+    Requests:
+      cpu:     25m
+      memory:  32Mi
+    Environment:
+      REPO_SYNC_IMAGE:  harbor-repo.vmware.com/challagandlp/kubeapps/kubeapps-asset-syncer:2.4.1-scratch-r0
+    Mounts:             <none>
+  Volumes:              <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Progressing    True    NewReplicaSetAvailable
+  Available      True    MinimumReplicasAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   kubeapps-internal-apprepository-controller-7df9954cdb (1/1 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  68m   deployment-controller  Scaled up replica set kubeapps-internal-apprepository-controller-7df9954cdb to 1
+
+
+Name:                   kubeapps-internal-assetsvc
+Namespace:              kubeapps
+CreationTimestamp:      Wed, 01 Dec 2021 14:44:31 -0500
+Labels:                 app.kubernetes.io/component=assetsvc
+                        app.kubernetes.io/instance=kubeapps
+                        app.kubernetes.io/managed-by=Helm
+                        app.kubernetes.io/name=kubeapps
+                        helm.sh/chart=kubeapps-7.5.10
+Annotations:            deployment.kubernetes.io/revision: 1
+                        meta.helm.sh/release-name: kubeapps
+                        meta.helm.sh/release-namespace: kubeapps
+Selector:               app.kubernetes.io/component=assetsvc,app.kubernetes.io/instance=kubeapps,app.kubernetes.io/name=kubeapps
+Replicas:               1 desired | 1 updated | 1 total | 1 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app.kubernetes.io/component=assetsvc
+           app.kubernetes.io/instance=kubeapps
+           app.kubernetes.io/managed-by=Helm
+           app.kubernetes.io/name=kubeapps
+           helm.sh/chart=kubeapps-7.5.10
+  Containers:
+   assetsvc:
+    Image:      harbor-repo.vmware.com/challagandlp/kubeapps/kubeapps-assetsvc:2.4.1-scratch-r0
+    Port:       8080/TCP
+    Host Port:  0/TCP
+    Command:
+      /assetsvc
+    Args:
+      --database-user=postgres
+      --database-name=assets
+      --database-url=kubeapps-postgresql-headless:5432
+    Liveness:   http-get http://:8080/live delay=60s timeout=5s period=10s #success=1 #failure=6
+    Readiness:  http-get http://:8080/ready delay=0s timeout=5s period=10s #success=1 #failure=6
+    Environment:
+      DB_PASSWORD:    <set to the key 'postgresql-password' in secret 'kubeapps-postgresql'>  Optional: false
+      POD_NAMESPACE:   (v1:metadata.namespace)
+      PORT:           8080
+    Mounts:           <none>
+  Volumes:            <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   kubeapps-internal-assetsvc-858b48ff87 (1/1 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  68m   deployment-controller  Scaled up replica set kubeapps-internal-assetsvc-858b48ff87 to 1
+
+
+Name:                   kubeapps-internal-dashboard
+Namespace:              kubeapps
+CreationTimestamp:      Wed, 01 Dec 2021 14:44:31 -0500
+Labels:                 app.kubernetes.io/component=dashboard
+                        app.kubernetes.io/instance=kubeapps
+                        app.kubernetes.io/managed-by=Helm
+                        app.kubernetes.io/name=kubeapps
+                        helm.sh/chart=kubeapps-7.5.10
+Annotations:            deployment.kubernetes.io/revision: 1
+                        meta.helm.sh/release-name: kubeapps
+                        meta.helm.sh/release-namespace: kubeapps
+Selector:               app.kubernetes.io/component=dashboard,app.kubernetes.io/instance=kubeapps,app.kubernetes.io/name=kubeapps
+Replicas:               2 desired | 2 updated | 2 total | 2 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:       app.kubernetes.io/component=dashboard
+                app.kubernetes.io/instance=kubeapps
+                app.kubernetes.io/managed-by=Helm
+                app.kubernetes.io/name=kubeapps
+                helm.sh/chart=kubeapps-7.5.10
+  Annotations:  checksum/config: 9dae910dfb9091d3bc5a91236270a5f2e89d6766e838188e833def6bcba2b438
+  Containers:
+   dashboard:
+    Image:      harbor-repo.vmware.com/challagandlp/kubeapps/kubeapps-dashboard:2.4.1-debian-10-r16
+    Port:       8080/TCP
+    Host Port:  0/TCP
+    Limits:
+      cpu:     250m
+      memory:  128Mi
+    Requests:
+      cpu:      25m
+      memory:   32Mi
+    Liveness:   http-get http://:8080/ delay=60s timeout=5s period=10s #success=1 #failure=6
+    Readiness:  http-get http://:8080/ delay=0s timeout=5s period=10s #success=1 #failure=6
+    Environment:
+      BITNAMI_DEBUG:  false
+    Mounts:
+      /app/config.json from config (rw,path="config.json")
+      /app/custom-components from custom-components (rw)
+      /app/custom-css from custom-css (rw)
+      /app/custom-locale from custom-locale (rw)
+      /opt/bitnami/nginx/conf/server_blocks from vhost (rw)
+  Volumes:
+   vhost:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      kubeapps-internal-dashboard-config
+    Optional:  false
+   config:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      kubeapps-internal-dashboard-config
+    Optional:  false
+   custom-css:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      kubeapps-internal-dashboard-config
+    Optional:  false
+   custom-locale:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      kubeapps-internal-dashboard-config
+    Optional:  false
+   custom-components:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      kubeapps-internal-dashboard-config
+    Optional:  false
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Progressing    True    NewReplicaSetAvailable
+  Available      True    MinimumReplicasAvailable
+OldReplicaSets:  kubeapps-internal-dashboard-74f546d984 (2/2 replicas created)
+NewReplicaSet:   <none>
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  68m   deployment-controller  Scaled up replica set kubeapps-internal-dashboard-74f546d984 to 2
+
+
+Name:                   kubeapps-internal-kubeappsapis
+Namespace:              kubeapps
+CreationTimestamp:      Wed, 01 Dec 2021 14:44:31 -0500
+Labels:                 app.kubernetes.io/component=kubeappsapis
+                        app.kubernetes.io/managed-by=Helm
+Annotations:            deployment.kubernetes.io/revision: 1
+                        meta.helm.sh/release-name: kubeapps
+                        meta.helm.sh/release-namespace: kubeapps
+Selector:               app.kubernetes.io/component=kubeappsapis,app.kubernetes.io/instance=kubeapps,app.kubernetes.io/name=kubeapps
+Replicas:               1 desired | 1 updated | 1 total | 1 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app.kubernetes.io/component=kubeappsapis
+           app.kubernetes.io/instance=kubeapps
+           app.kubernetes.io/managed-by=Helm
+           app.kubernetes.io/name=kubeapps
+           helm.sh/chart=kubeapps-7.5.10
+  Containers:
+   kubeappsapis:
+    Image:      harbor-repo.vmware.com/challagandlp/kubeapps/kubeapps-apis:2.4.1-debian-10-r18
+    Port:       50051/TCP
+    Host Port:  0/TCP
+    Command:
+      /kubeapps-apis
+    Args:
+      --plugin-dir
+      /plugins/helm
+      --clusters-config-path=/config/clusters.conf
+    Limits:
+      cpu:     250m
+      memory:  256Mi
+    Requests:
+      cpu:      25m
+      memory:   32Mi
+    Liveness:   http-get http://:50051/core/plugins/v1alpha1/configured-plugins delay=60s timeout=5s period=10s #success=1 #failure=6
+    Readiness:  http-get http://:50051/core/plugins/v1alpha1/configured-plugins delay=0s timeout=5s period=10s #success=1 #failure=6
+    Environment:
+      PORT:                          50051
+      POD_NAMESPACE:                  (v1:metadata.namespace)
+      ASSET_SYNCER_DB_URL:           kubeapps-postgresql-headless:5432
+      ASSET_SYNCER_DB_NAME:          assets
+      ASSET_SYNCER_DB_USERNAME:      postgres
+      ASSET_SYNCER_DB_USERPASSWORD:  <set to the key 'postgresql-password' in secret 'kubeapps-postgresql'>  Optional: false
+    Mounts:
+      /config from clusters-config (rw)
+      /etc/additional-clusters-cafiles from ca-certs (rw)
+  Volumes:
+   clusters-config:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      kubeapps-clusters-config
+    Optional:  false
+   ca-certs:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   kubeapps-internal-kubeappsapis-b9768b7f9 (1/1 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  68m   deployment-controller  Scaled up replica set kubeapps-internal-kubeappsapis-b9768b7f9 to 1
+
+
+Name:                   kubeapps-internal-kubeops
+Namespace:              kubeapps
+CreationTimestamp:      Wed, 01 Dec 2021 14:44:31 -0500
+Labels:                 app.kubernetes.io/component=kubeops
+                        app.kubernetes.io/managed-by=Helm
+Annotations:            deployment.kubernetes.io/revision: 1
+                        meta.helm.sh/release-name: kubeapps
+                        meta.helm.sh/release-namespace: kubeapps
+Selector:               app.kubernetes.io/component=kubeops,app.kubernetes.io/instance=kubeapps,app.kubernetes.io/name=kubeapps
+Replicas:               2 desired | 2 updated | 2 total | 2 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:           app.kubernetes.io/component=kubeops
+                    app.kubernetes.io/instance=kubeapps
+                    app.kubernetes.io/managed-by=Helm
+                    app.kubernetes.io/name=kubeapps
+                    helm.sh/chart=kubeapps-7.5.10
+  Service Account:  kubeapps-internal-kubeops
+  Containers:
+   kubeops:
+    Image:      harbor-repo.vmware.com/challagandlp/kubeapps/kubeapps-kubeops:2.4.1-scratch-r0
+    Port:       8080/TCP
+    Host Port:  0/TCP
+    Command:
+      /kubeops
+    Args:
+      --user-agent-comment=kubeapps/2.4.1
+      --assetsvc-url=http://kubeapps-internal-assetsvc:8080
+      --clusters-config-path=/config/clusters.conf
+    Limits:
+      cpu:     250m
+      memory:  256Mi
+    Requests:
+      cpu:      25m
+      memory:   32Mi
+    Liveness:   http-get http://:8080/live delay=60s timeout=5s period=10s #success=1 #failure=6
+    Readiness:  http-get http://:8080/ready delay=0s timeout=5s period=10s #success=1 #failure=6
+    Environment:
+      POD_NAMESPACE:   (v1:metadata.namespace)
+      PORT:           8080
+    Mounts:
+      /config from clusters-config (rw)
+      /etc/additional-clusters-cafiles from ca-certs (rw)
+  Volumes:
+   clusters-config:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      kubeapps-clusters-config
+    Optional:  false
+   ca-certs:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:     
+    SizeLimit:  <unset>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Progressing    True    NewReplicaSetAvailable
+  Available      True    MinimumReplicasAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   kubeapps-internal-kubeops-9b5695766 (2/2 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  68m   deployment-controller  Scaled up replica set kubeapps-internal-kubeops-9b5695766 to 2

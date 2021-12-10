@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: ubuntu-networking
+  name: ubuntu-networking
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ubuntu-networking
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: ubuntu-networking
+    spec:
+      containers:
+      - image: harbor-repo.vmware.com/challagandlp/tools/ubuntu-networking
+        name: ubuntu-networking
+        command: ["/bin/sleep", "3650d"]
+        resources: {}
+      securityContext:
+        runAsUser: 0
