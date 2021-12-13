@@ -10,10 +10,10 @@ oc apply -n ${NAMESPACE} -f yelb-deployment.yaml
 oc apply -n ${NAMESPACE} -f yelb-svc-all-cip.yaml
 oc apply -n ${NAMESPACE} -f yelb-svc-ui-np.yaml
 oc apply -n ${NAMESPACE} -f yelb-svc-ui-lb.yaml
-oc apply -n ${NAMESPACE} -f route-ingress.yaml
 oc apply -n ${NAMESPACE} -f http-ingress-np.yaml
-oc apply -n ${NAMESPACE} -f https-secret.yam#l
 oc apply -n ${NAMESPACE} -f https-ingress-np.yaml
+
+oc apply -n ${NAMESPACE} -f route-ingress.yaml
 
 oc adm policy add-scc-to-user privileged -n ${NAMESPACE} -z deployer
 oc adm policy add-scc-to-user privileged -n ${NAMESPACE} -z builder

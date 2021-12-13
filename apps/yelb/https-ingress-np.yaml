@@ -7,10 +7,10 @@ metadata:
 spec:
   tls:
   - hosts:
-      - yelbsecure.apps.ocp-jb.vsanpe.vmware.com
+      - yelbsecure.apps.ocp-cl01.vmware.ocpeval.scstec.net
     secretName: yelb-https-secret
   rules:
-    - host: yelbsecure.apps.ocp-jb.vsanpe.vmware.com
+    - host: yelbsecure.apps.ocp-cl01.vmware.ocpeval.scstec.net
       http:
         paths:
         - path: /
