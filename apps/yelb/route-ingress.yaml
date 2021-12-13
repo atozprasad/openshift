@@ -5,8 +5,8 @@ metadata:
  #   haproxy.router.openshift.io/timeout: 5500ms
  name: yelb-route
 spec:
- host: yelb.apps.ocp-jb.vsanpe.vmware.com
+ host: yelbroute.apps.ocp-cl01.vmware.ocpeval.scstec.net
  path: /
  to:
    kind: Service
-   name: yelb-ui-svc-np
+   name: yelb-ui-cip

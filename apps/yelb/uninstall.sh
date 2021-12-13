@@ -3,11 +3,15 @@ source local.env
 
 
 oc delete -n ${NAMESPACE} -f yelb-deployment.yaml
-oc delete -n ${NAMESPACE} -f yelb-svc-np.yaml
-oc delete -n ${NAMESPACE} -f  http-ingress-np.yaml
-oc delete -n ${NAMESPACE} -f  https-ingress-np.yaml
+oc delete -n ${NAMESPACE} -f yelb-svc-all-cip.yaml
+oc delete -n ${NAMESPACE} -f yelb-svc-ui-np.yaml
+oc delete -n ${NAMESPACE} -f yelb-svc-ui-lb.yaml
 oc delete -n ${NAMESPACE} -f route-ingress.yaml
-oc delete -n ${NAMESPACE} -f  yelb-lb.yaml
+oc delete -n ${NAMESPACE} -f http-ingress-np.yaml
+oc delete -n ${NAMESPACE} -f https-secret.yam#l
+oc delete -n ${NAMESPACE} -f https-ingress-np.yaml
+
+oc delete namespace  ${NAMESPACE}
 
 kubectl config set-context --current --namespace=default
 

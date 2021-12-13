@@ -1,0 +1,66 @@
+# Minor modification from http://www.it20.info/2017/07/yelb-yet-another-sample-app/ for demo purposes
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-server
+  labels:
+    app: redis-server
+    tier: cache
+  namespace: yelb
+spec:
+  type: ClusterIP
+  ports:
+  - port: 6379
+  selector:
+    app: redis-server
+    tier: cache
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: yelb-db
+  labels:
+    app: yelb-db
+    tier: backenddb
+  namespace: yelb
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5432
+  selector:
+    app: yelb-db
+    tier: backenddb
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: yelb-appserver
+  labels:
+    app: yelb-appserver
+    tier: middletier
+  namespace: yelb
+spec:
+  type: ClusterIP
+  ports:
+  - port: 4567
+  selector:
+    app: yelb-appserver
+    tier: middletier
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: yelb-ui-cip
+  labels:
+    app: yelb-ui
+    tier: frontend
+  namespace: yelb
+spec:
+  type: ClusterIP 
+  ports:
+  - port: 31001
+    protocol: TCP
+    targetPort: 31001
+  selector:
+    app: yelb-ui
+    tier: frontend

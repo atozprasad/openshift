@@ -5,8 +5,9 @@ metadata:
   labels:
     app: yelb
 spec:
+  ingressClassName: avi-lb
   rules:
-    - host: yelbhttp.apps.ocp-jb.vsanpe.vmware.com
+    - host: yelbinscure.apps.ocp-cl01.vmware.ocpeval.scstec.net
       http:
         paths:
         - path: /
