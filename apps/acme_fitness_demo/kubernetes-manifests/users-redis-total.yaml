@@ -35,7 +35,7 @@ spec:
       containers:
         - name: users-redis
           #image: bitnami/redis
-          image: harbor-repo.vmware.com/challagandlp/acmeshop/redis
+          image: harbor-repo.vmware.ocpeval.scstec.net/acmeshop/redis
           imagePullPolicy: Always
           resources:
             requests:

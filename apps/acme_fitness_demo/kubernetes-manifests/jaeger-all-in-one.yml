@@ -47,7 +47,7 @@ items:
               - name: COLLECTOR_ZIPKIN_HTTP_PORT
                 value: "9411"
               #image: jaegertracing/all-in-one
-              image: harbor-repo.vmware.com/challagandlp/acmeshop/all-in-one
+              image: harbor-repo.vmware.ocpeval.scstec.net/acmeshop/all-in-one
               name: jaeger
               ports:
                 - containerPort: 5775

@@ -40,7 +40,7 @@ spec:
     spec:
       containers:
       #- image: gcr.io/vmwarecloudadvocacy/acmeshop-pos:v0.1.0-beta
-      - image: harbor-repo.vmware.com/challagandlp/acmeshop/acmeshop-pos:v0.1.0-beta
+      - image: harbor-repo.vmware.ocpeval.scstec.net/acmeshop/acmeshop-pos:v0.1.0-beta
         name: pos
         env:
         - name: HTTP_PORT

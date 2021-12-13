@@ -39,7 +39,7 @@ spec:
         service: frontend
     spec:
       containers:
-      - image: harbor-repo.vmware.com/challagandlp/acmeshop/acmeshop-front-end:latest
+      - image: harbor-repo.vmware.ocpeval.scstec.net/acmeshop/acmeshop-front-end:latest
         name: frontend
         env:
         - name: FRONTEND_PORT

@@ -36,7 +36,7 @@ spec:
       containers:
         - name: users-mongo
           #image: mongo:4
-          image: harbor-repo.vmware.com/challagandlp/acmeshop/mongo:4
+          image: harbor-repo.vmware.ocpeval.scstec.net/acmeshop/mongo:4
           resources:
             {}
           ports:

@@ -41,7 +41,7 @@ spec:
       containers:
       #- image: gcr.io/vmwarecloudadvocacy/acmeshop-cart:latest
       #  imagePullPolicy: "Always"
-      - image: harbor-repo.vmware.com/challagandlp/acmeshop/acmeshop-cart:latest
+      - image: harbor-repo.vmware.ocpeval.scstec.net/acmeshop/acmeshop-cart:latest
         imagePullPolicy: "IfNotPresent"
         name: cart
         env:

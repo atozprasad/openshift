@@ -42,7 +42,7 @@ spec:
       - name: postgres
         #image: postgres:9.5
         #imagePullPolicy: "Always"
-        image: harbor-repo.vmware.com/challagandlp/acmeshop/postgres:9.5
+        image: harbor-repo.vmware.ocpeval.scstec.net/acmeshop/postgres:9.5
         imagePullPolicy: "IfNotPresent"
         ports:
         - containerPort: 5432

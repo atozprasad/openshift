@@ -37,7 +37,7 @@ spec:
     spec:
       containers:
       #- image: gcr.io/vmwarecloudadvocacy/acmeshop-payment:latest
-      - image: harbor-repo.vmware.com/challagandlp/acmeshop/acmeshop-payment:latest
+      - image: harbor-repo.vmware.ocpeval.scstec.net/acmeshop/acmeshop-payment:latest
         name: payment
         env:
         - name: PAYMENT_PORT

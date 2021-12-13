@@ -40,7 +40,7 @@ spec:
         emptyDir: {}
       containers:
       #- image: gcr.io/vmwarecloudadvocacy/acmeshop-user:latest
-      - image: harbor-repo.vmware.com/challagandlp/acmeshop/acmeshop-user:latest
+      - image: harbor-repo.vmware.ocpeval.scstec.net/acmeshop/acmeshop-user:latest
         imagePullPolicy: "Always"
         name: users
         env:

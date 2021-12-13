@@ -8,10 +8,10 @@ metadata:
 spec:
   tls:
   - hosts:
-      - acmefitness.apps.ocp-jb.vsanpe.vmware.com
+      - acmefitness.apps.ocp-cl01.vmware.ocpeval.scstec.net
     secretName: acme-fitness-https-secret
   rules:
-    - host: acmefitness.apps.ocp-jb.vsanpe.vmware.com
+    - host: acmefitness.apps.ocp-cl01.vmware.ocpeval.scstec.net
       http:
         paths:
         - path: /

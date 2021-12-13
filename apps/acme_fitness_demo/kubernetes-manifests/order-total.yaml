@@ -40,7 +40,7 @@ spec:
         emptyDir: {}
       containers:
       #- image: gcr.io/vmwarecloudadvocacy/acmeshop-order:latest
-      - image: harbor-repo.vmware.com/challagandlp/acmeshop/acmeshop-order:latest
+      - image: harbor-repo.vmware.ocpeval.scstec.net/acmeshop/acmeshop-order:latest
         name: order
         env:
         - name: ORDER_DB_HOST
