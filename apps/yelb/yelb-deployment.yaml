@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: yelb-ui
-        image: harbor-repo.vmware.com/challagandlp/mreferre/yelb-ui:0.6
+        image: harbor-repo.vmware.ocpeval.scstec.net/yelb/yelb-ui:0.6
         securityContext:
           allowPrivilegeEscalation: true
           runAsUser: 0
@@ -42,7 +42,7 @@ spec:
     spec:
       containers:
       - name: redis-server
-        image: harbor-repo.vmware.com/challagandlp/mreferre/redis:4.0.2
+        image: harbor-repo.vmware.ocpeval.scstec.net/yelb/redis:4.0.2
         ports:
         - containerPort: 6379
 ---
@@ -64,7 +64,7 @@ spec:
     spec:
       containers:
       - name: yelb-db
-        image: harbor-repo.vmware.com/challagandlp/mreferre/yelb-db:0.5
+        image: harbor-repo.vmware.ocpeval.scstec.net/yelb/yelb-db:0.5
         securityContext:
           allowPrivilegeEscalation: true
           runAsUser: 0
@@ -89,6 +89,6 @@ spec:
     spec:
       containers:
       - name: yelb-appserver
-        image: harbor-repo.vmware.com/challagandlp/mreferre/yelb-appserver:0.5
+        image: harbor-repo.vmware.ocpeval.scstec.net/yelb/yelb-appserver:0.5
         ports:
         - containerPort: 4567

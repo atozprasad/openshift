@@ -7,6 +7,7 @@ oc delete -n ${NAMESPACE} -f yelb-svc-np.yaml
 oc delete -n ${NAMESPACE} -f  http-ingress-np.yaml
 oc delete -n ${NAMESPACE} -f  https-ingress-np.yaml
 oc delete -n ${NAMESPACE} -f route-ingress.yaml
+oc delete -n ${NAMESPACE} -f  yelb-lb.yaml
 
 kubectl config set-context --current --namespace=default
 

@@ -11,6 +11,7 @@ oc apply -n ${NAMESPACE} -f  http-ingress-np.yaml
 oc apply -n ${NAMESPACE} -f  https-secret.yaml
 oc apply -n ${NAMESPACE} -f  https-ingress-np.yaml
 oc apply -n ${NAMESPACE} -f route-ingress.yaml
+oc apply -n ${NAMESPACE} -f  yelb-lb.yaml
 
 oc adm policy add-scc-to-user anyuid -n ${NAMESPACE}  -z deployer
 oc adm policy add-scc-to-user anyuid -n ${NAMESPACE} -z builder
