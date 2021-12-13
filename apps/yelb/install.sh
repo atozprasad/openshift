@@ -10,8 +10,6 @@ oc apply -n ${NAMESPACE} -f yelb-deployment.yaml
 oc apply -n ${NAMESPACE} -f yelb-svc-all-cip.yaml
 oc apply -n ${NAMESPACE} -f yelb-svc-ui-np.yaml
 oc apply -n ${NAMESPACE} -f yelb-svc-ui-lb.yaml
-oc apply -n ${NAMESPACE} -f http-ingress-np.yaml
-oc apply -n ${NAMESPACE} -f https-ingress-np.yaml
 
 oc apply -n ${NAMESPACE} -f route-ingress.yaml
 
