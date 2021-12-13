@@ -2,15 +2,9 @@
 #helm repo add bitnami https://charts.bitnami.com/bitnami
 #helm install kubeapps --namespace kubeapps bitnami/kubeapps
 
-#!/bin/bash
-### Installing my sql app
 
-### Enabled one of the two available variables
-#CTL=kubectl
-
-CTL=oc
-NAMESPACE=kubeapps 
-
+source local.env
+kubectl config set-context --current --namespace=${NAMESPACE}
 
 
 #Step-1 Create NameSpace
@@ -38,4 +32,4 @@ kubectl get --namespace default secret $(kubectl get --namespace default service
 #Step-5 Port forward
 kubectl port-forward -n kubeapps svc/kubeapps 8080:80
 
-
+kubectl config set-context --current --namespace=kubeapps
