@@ -14,6 +14,7 @@ oc apply -n ${NAMESPACE} -f yelb-svc-ui-lb.yaml
 oc apply -n ${NAMESPACE} -f route-ingress.yaml
 oc apply -n ${NAMESPACE} -f route-secure-ingress.yaml
 
+
 oc adm policy add-scc-to-user privileged -n ${NAMESPACE} -z deployer
 oc adm policy add-scc-to-user privileged -n ${NAMESPACE} -z builder
 oc adm policy add-scc-to-user privileged -n ${NAMESPACE} -z default

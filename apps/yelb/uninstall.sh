@@ -7,9 +7,10 @@ oc delete -n ${NAMESPACE} -f yelb-svc-all-cip.yaml
 oc delete -n ${NAMESPACE} -f yelb-svc-ui-np.yaml
 oc delete -n ${NAMESPACE} -f yelb-svc-ui-lb.yaml
 oc delete -n ${NAMESPACE} -f route-ingress.yaml
+oc delete -n ${NAMESPACE} -f route-ingress.yaml
 oc delete -n ${NAMESPACE} -f route-secure-ingress.yaml
 
-oc delete namespace  ${NAMESPACE}
+#oc delete namespace  ${NAMESPACE}
 
 kubectl config set-context --current --namespace=default
 
