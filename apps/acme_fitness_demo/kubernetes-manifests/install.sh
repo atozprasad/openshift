@@ -1,29 +1,38 @@
 #!/bin/bash
-ACME_SECRET=VMware1!
+ACME_SECRET=password
 NAMESPACE=acme-fitness
 
 kubectl create ns ${NAMESPACE}
-kubectl -n ${NAMESPACE} apply -f 01-create-pvc.yaml
+oc -n ${NAMESPACE} apply -f 01-create-pvc-catalog.yaml
+oc -n ${NAMESPACE} apply -f 01-create-pvc-mongodata.yaml
 kubectl -n ${NAMESPACE} create secret generic cart-redis-pass --from-literal=password=${ACME_SECRET}
-kubectl -n ${NAMESPACE} apply -f cart-redis-total.yaml
 kubectl -n ${NAMESPACE} apply -f cart-total.yaml
+kubectl -n ${NAMESPACE} apply -f cart-redis-total.yaml
+kubectl -n ${NAMESPACE} apply -f 01-create-pvc.yaml
+
 kubectl -n ${NAMESPACE} create secret generic catalog-mongo-pass --from-literal=password=${ACME_SECRET}
 kubectl -n ${NAMESPACE} create -f catalog-db-initdb-configmap.yaml
 kubectl -n ${NAMESPACE} apply -f catalog-db-total.yaml
 kubectl -n ${NAMESPACE} apply -f catalog-total.yaml
+
 kubectl -n ${NAMESPACE} apply -f payment-total.yaml
+
+
 kubectl -n ${NAMESPACE} create secret generic order-postgres-pass --from-literal=password=${ACME_SECRET}
 kubectl -n ${NAMESPACE} apply -f order-db-total.yaml
 kubectl -n ${NAMESPACE} apply -f order-total.yaml
+
 kubectl -n ${NAMESPACE} create secret generic users-mongo-pass --from-literal=password=${ACME_SECRET}
 kubectl -n ${NAMESPACE} create secret generic users-redis-pass --from-literal=password=${ACME_SECRET}
 kubectl -n ${NAMESPACE} create -f users-db-initdb-configmap.yaml
 kubectl -n ${NAMESPACE} apply -f users-db-total.yaml
 kubectl -n ${NAMESPACE} apply -f users-redis-total.yaml
 kubectl -n ${NAMESPACE} apply -f users-total.yaml
+
 kubectl -n ${NAMESPACE} apply -f frontend-total.yaml
+
 kubectl -n ${NAMESPACE} apply -f point-of-sales-total.yaml
-kubectl -n ${NAMESPACE} apply -f point-of-sales-total.yaml
+
 
 ####  LB & Route objects
 oc -n ${NAMESPACE} apply -f acme-lb.yaml
