@@ -25,7 +25,6 @@ oc -n ${NAMESPACE} delete -f point-of-sales-total.yaml
 ####  LB & Route objects
 oc -n ${NAMESPACE} delete -f acme-lb.yaml
 oc -n ${NAMESPACE} delete -f route-ingress.yaml
-#oc -n ${NAMESPACE} apply -f https-secret.yaml
-#oc -n ${NAMESPACE} apply -f https-ingress-overnp.yaml
+oc -n ${NAMESPACE} delete -f route-secure-ingress.yaml
 
-oc delete ns ${NAMESPACE}
+#oc delete ns ${NAMESPACE}

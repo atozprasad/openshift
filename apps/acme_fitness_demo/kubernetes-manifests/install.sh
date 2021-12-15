@@ -30,13 +30,14 @@ kubectl -n ${NAMESPACE} apply -f users-redis-total.yaml
 kubectl -n ${NAMESPACE} apply -f users-total.yaml
 
 kubectl -n ${NAMESPACE} apply -f frontend-total.yaml
-
 kubectl -n ${NAMESPACE} apply -f point-of-sales-total.yaml
+kubectl -n ${NAMESPACE} apply -f route-secure-ingress.yaml
 
 
 ####  LB & Route objects
 oc -n ${NAMESPACE} apply -f acme-lb.yaml
 oc -n ${NAMESPACE} apply -f route-ingress.yaml
+
 #kubectl -n ${NAMESPACE} apply -f https-secret.yaml
 #kubectl -n ${NAMESPACE} apply -f https-ingress-overnp.yaml
 
