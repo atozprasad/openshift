@@ -32,11 +32,21 @@ kubectl create secret generic vsphere-config-secret --from-file=./csi-vsphere.co
 kubectl apply -f ./vsphere-csi-driver.yaml
 
 
-kubectl describe CSINode/ocp-cl03-worker1
+kubectl describe CSINode/ocp-cl02-worker1
 #Step-4.1 Grant scc privillages to the service account cloud-controller-manager
 
+oc adm policy add-scc-to-user anyuid -n vmware-system-csi -z builder
+oc adm policy add-scc-to-user anyuid -n vmware-system-csi -z deployer
 oc adm policy add-scc-to-user anyuid -n vmware-system-csi -z default
 oc adm policy add-scc-to-user anyuid -n vmware-system-csi -z vmware-system-csi
+oc adm policy add-scc-to-user anyuid -n vmware-system-csi -z vsphere-csi-node
+
+
+oc adm policy add-scc-to-user privileged -n vmware-system-csi -z builder
+oc adm policy add-scc-to-user privileged -n vmware-system-csi -z deployer
+oc adm policy add-scc-to-user privileged -n vmware-system-csi -z default
+oc adm policy add-scc-to-user privileged -n vmware-system-csi -z vmware-system-csi
+oc adm policy add-scc-to-user privileged -n vmware-system-csi -z vsphere-csi-node
 
 
 echo -e "\nsleeping 15 sec..."
