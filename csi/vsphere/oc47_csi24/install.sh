@@ -1,5 +1,6 @@
 #!/bin/bash
 
+source vsphere.env
 
 echo -e "\n Generating 2 files (1) csi-vsphere.conf (2) vsphere.conf"
 ./generateConf.sh
@@ -32,7 +33,7 @@ kubectl create secret generic vsphere-config-secret --from-file=./csi-vsphere.co
 kubectl apply -f ./vsphere-csi-driver.yaml
 
 
-kubectl describe CSINode/ocp-cl02-worker1
+kubectl describe CSINode/${OCP_VM_PREFIX}-worker1
 #Step-4.1 Grant scc privillages to the service account cloud-controller-manager
 
 oc adm policy add-scc-to-user anyuid -n vmware-system-csi -z builder
@@ -49,8 +50,7 @@ oc adm policy add-scc-to-user privileged -n vmware-system-csi -z vmware-system-c
 oc adm policy add-scc-to-user privileged -n vmware-system-csi -z vsphere-csi-node
 
 
-echo -e "\nsleeping 15 sec..."
-sleep 15 
+watch oc get pods -n vmware-system-csi
 
 kubectl get csinode -o="custom-columns=NAME:metadata.name,DRIVERS:spec.drivers[].name"
 kubectl get CSINode
