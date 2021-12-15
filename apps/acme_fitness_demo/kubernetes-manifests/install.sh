@@ -22,8 +22,8 @@ kubectl -n ${NAMESPACE} apply -f users-redis-total.yaml
 kubectl -n ${NAMESPACE} apply -f users-total.yaml
 kubectl -n ${NAMESPACE} apply -f frontend-total.yaml
 kubectl -n ${NAMESPACE} apply -f point-of-sales-total.yaml
-kubectl -n ${NAMESPACE} apply -f https-secret.yaml
-kubectl -n ${NAMESPACE} apply -f https-ingress-overnp.yaml
+#kubectl -n ${NAMESPACE} apply -f https-secret.yaml
+#kubectl -n ${NAMESPACE} apply -f https-ingress-overnp.yaml
 
 ## Apply SCC to the serviceaccounts/users default, deployer, builder
 echo -e "\n\t Applying  SCC to the serviceaccounts/users default, deployer, builder"
@@ -36,4 +36,4 @@ oc adm policy add-scc-to-user anyuid -n ${NAMESPACE}  -z deployer
 oc adm policy add-scc-to-user anyuid -n ${NAMESPACE} -z builder
 oc adm policy add-scc-to-user anyuid -n ${NAMESPACE} -z default
 
-kubectl config set-context --current --namespace=acme-fitness
+kubectl config set-context --current --namespace=${NAMESPACE}

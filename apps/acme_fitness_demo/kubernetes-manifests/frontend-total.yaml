@@ -7,11 +7,10 @@ metadata:
     service: frontend
 spec:
   ports:
-    - name: http-frontend
+    - port: 80
       protocol: TCP
-      port: 80
       targetPort: 3000
-      nodePort: 31432
+      #nodePort: 31432
   selector:
     app: acmefit
     service: frontend

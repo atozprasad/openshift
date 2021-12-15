@@ -166,3 +166,22 @@ The current version of the application has been augmented with distributed traci
 To avoid issues with unresolvable hostnames, `JAEGER_AGENT_HOST` is set to `localhost` in all of the manifests in this repo. To use tracing, this value will need to be replaced. If using the `jaeger-all-in-one.yml` manifest included in this repo, this value should be changed to `jaeger.<jaeger namespace>`.
 
 It is strongly recommended that the `JAEGER_AGENT_PORT` values not be modified as the tracing library implementations for specific languages favor certain ports.
+
+
+
+############## Openshift Environment
+# oc get svc
+NAME             TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)          AGE
+acmefit-lb       LoadBalancer   172.50.118.78    10.15.15.145   80:30995/TCP     4s
+cart             ClusterIP      172.50.202.159   <none>         5000/TCP         7m1s
+cart-redis       ClusterIP      172.50.171.42    <none>         6379/TCP         7m1s
+catalog          ClusterIP      172.50.219.113   <none>         8082/TCP         7m
+catalog-mongo    ClusterIP      172.50.91.9      <none>         27017/TCP        7m
+frontend         NodePort       172.50.0.187     <none>         80:30568/TCP     6m56s
+order            ClusterIP      172.50.252.85    <none>         6000/TCP         6m58s
+order-postgres   ClusterIP      172.50.203.26    <none>         5432/TCP         6m59s
+payment          ClusterIP      172.50.43.184    <none>         9000/TCP         6m59s
+pos              NodePort       172.50.230.26    <none>         7777:31431/TCP   6m55s
+users            ClusterIP      172.50.250.238   <none>         8083/TCP         6m56s
+users-mongo      ClusterIP      172.50.128.2     <none>         27017/TCP        6m57s
+users-redis      ClusterIP      172.50.141.99    <none>         6379/TCP         6m56s
