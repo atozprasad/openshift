@@ -1,0 +1,11 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+ name: acme-route
+spec:
+ host: acme.apps.ocp-cl03.vmware.ocpeval.scstec.net
+ path: /
+ to:
+   kind: Service
+   name: frontend
+   targetport: 80
