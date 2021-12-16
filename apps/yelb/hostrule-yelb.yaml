@@ -1,0 +1,14 @@
+apiVersion: ako.vmware.com/v1alpha1
+kind: HostRule
+metadata:
+   name: yelb-hostrule
+spec:
+  virtualhost:
+    fqdn: yelbhttps.apps.ocp-cl03.vmware.ocpeval.scstec.net
+    wafPolicy: "yelb-waftest"
+    #httpPolicy:
+    #  policySets:
+    #  - "test"
+    #  overwrite: false
+    applicationProfile: yelb-app-profile
+    analyticsProfile: yelb-analytics-profile
